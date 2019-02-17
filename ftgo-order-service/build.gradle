@@ -53,27 +53,25 @@ dockerCompose {
 
     startedServices = [ 'not-used']
 
-    componentTests {
-        if (System.getenv("FTGO_DOCKER_COMPOSE_FILES") != null)
-            useComposeFiles = System.getenv("FTGO_DOCKER_COMPOSE_FILES").split(",").collect { "../" + it }
-        startedServices = [ 'ftgo-order-service']
-        stopContainers = true
-    }
-
     integrationTests {
         if (System.getenv("FTGO_DOCKER_COMPOSE_FILES") != null)
             useComposeFiles = System.getenv("FTGO_DOCKER_COMPOSE_FILES").split(",").collect { "../" + it }
 
         startedServices = [ 'mysql']
-        stopContainers = true
     }
+
+    componentTests {
+        if (System.getenv("FTGO_DOCKER_COMPOSE_FILES") != null)
+            useComposeFiles = System.getenv("FTGO_DOCKER_COMPOSE_FILES").split(",").collect { "../" + it }
+        startedServices = [ 'ftgo-order-service']
+        forceRecreate = true
+    }
+
 }
 
 integrationTest.dependsOn(integrationTestsComposeUp)
-integrationTest.finalizedBy(integrationTestsComposeDown)
 
 componentTest.dependsOn(componentTestsComposeUp)
-componentTest.finalizedBy(componentTestsComposeDown)
 
 
 protobuf {
