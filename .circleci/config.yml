@@ -11,9 +11,18 @@ jobs:
           paths:
             - ~/.gradle
           key: multi-repo-{{ checksum "build.gradle" }}
+      - run:
+          command:     |
+            ./.circleci/upgrade-docker-compose.sh
       - run: TERM=dumb ./gradlew check
-      - run: TERM=dumb ./gradlew integrationTest
-      - run: TERM=dumb ./gradlew componentTest
+      - run:
+          command: |
+            . .circleci/setenv-circle-ci.sh
+            ./gradlew integrationTest
+      - run:
+          command: |
+            . .circleci/setenv-circle-ci.sh
+            ./gradlew componentTest
       - run: TERM=dumb ./gradlew assemble
       - run:
           name: Save test results
