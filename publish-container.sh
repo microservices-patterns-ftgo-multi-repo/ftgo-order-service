@@ -8,7 +8,7 @@ IMAGE_NAME=${PWD##*/}_${N?}
 
 DOCKER_REPO=msapatternsmultirepo
 
-FN=${DOCKER_REPO}/${IMAGE_NAME?}:latest
+FN=${DOCKER_REPO}/${N?}:latest
 
 docker login -u ${DOCKER_USER_ID?} -p ${DOCKER_PASSWORD?}
 
