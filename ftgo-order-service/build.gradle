@@ -160,3 +160,4 @@ dependencies {
     testCompile "net.chrisrichardson.ftgo:ftgo-test-util:" + this["ftgo-test-util-version"]
 
 }
+
