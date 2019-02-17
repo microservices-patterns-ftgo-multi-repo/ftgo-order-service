@@ -2,8 +2,9 @@
 
 PREFIX=
 
-N=${PWD##*/}
-IMAGE_NAME=${N?}_${N?}
+N=${1?}
+
+IMAGE_NAME=${PWD##*/}_${N?}
 
 DOCKER_REPO=msapatternsmultirepo
 
